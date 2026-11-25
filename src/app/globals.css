@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display), Georgia, serif;
+
+  --color-cream: #fbf6ee;
+  --color-cream-deep: #f3eadc;
+  --color-paper: #fffdf8;
+  --color-ink: #2a1c15;
+  --color-muted: #7d6b5f;
+  --color-coffee: #4a3428;
+  --color-terracotta: #c56b45;
+  --color-terracotta-dark: #a85331;
+  --color-gold: #e5b45a;
+  --color-gold-soft: #f6e7c5;
+  --color-sage: #617f66;
+  --color-sage-soft: #e7efe6;
+  --color-line: #e9ddcc;
+}
+
+:root {
+  color-scheme: light;
+  --background: #fbf6ee;
+  --foreground: #2a1c15;
+}
+
+* {
+  border-color: var(--color-line);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background:
+    radial-gradient(1200px 600px at 85% -10%, rgba(229, 180, 90, 0.2), transparent 60%),
+    radial-gradient(900px 500px at -10% 20%, rgba(197, 107, 69, 0.1), transparent 55%),
+    var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  min-height: 100dvh;
+}
+
+::selection {
+  background: rgba(197, 107, 69, 0.22);
+}
+
+input,
+textarea,
+select,
+button {
+  font-family: inherit;
+}
+
+/* Warm, subtle card elevation shared by guest and admin screens. */
+.card-warm {
+  background: rgba(255, 253, 248, 0.92);
+  border: 1px solid rgba(233, 221, 204, 0.9);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.8) inset,
+    0 22px 60px -32px rgba(74, 52, 40, 0.35);
+}
+
+.paper-grain {
+  background-image: radial-gradient(rgba(74, 52, 40, 0.055) 0.7px, transparent 0.7px);
+  background-size: 9px 9px;
+}
+
+.fade-up {
+  animation: fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.fade-up-delay-1 { animation-delay: 0.08s; }
+.fade-up-delay-2 { animation-delay: 0.16s; }
+.fade-up-delay-3 { animation-delay: 0.24s; }
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+}
+.float-slow { animation: float-slow 7s ease-in-out infinite; }
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+.pulse-soft { animation: pulse-soft 2s ease-in-out infinite; }
+
+@keyframes pop-in {
+  from { opacity: 0; transform: scale(0.94); }
+  to { opacity: 1; transform: scale(1); }
+}
+.pop-in { animation: pop-in 0.25s ease-out both; }
+
+@keyframes confetti-fall {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(105vh) rotate(540deg); opacity: 0; }
+}
+.confetti-piece {
+  position: fixed;
+  top: -10vh;
+  width: 8px;
+  height: 14px;
+  border-radius: 2px;
+  animation: confetti-fall 3.8s ease-in forwards;
+  pointer-events: none;
+  z-index: 50;
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* QR sheet: print only the grid of codes. */
+@media print {
+  @page { size: A4; margin: 9mm; }
+  body { background: #fff !important; }
+  .no-print { display: none !important; }
+  .qr-print-area { display: block !important; padding: 0 !important; }
+  .qr-print-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 6mm !important;
+  }
+  .qr-card {
+    break-inside: avoid;
+    border: 1px dashed #cfc2b1 !important;
+    box-shadow: none !important;
+    padding: 6mm !important;
+  }
+  .qr-card img { width: 100% !important; height: auto !important; }
+}

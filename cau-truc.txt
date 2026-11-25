@@ -1,0 +1,7 @@
+src/app/                 Trang khách, admin, staff, API routes
+src/components/          UI khách, admin, nhân sự
+src/lib/db/              SQLite + Supabase repository
+src/lib/zalo.ts          Tin nhắn và Zalo Bot API
+supabase/schema.sql      Schema, RLS, RPC, bucket
+scripts/seed.ts          Menu và vé demo
+public/google-apps-script/Code.gs
